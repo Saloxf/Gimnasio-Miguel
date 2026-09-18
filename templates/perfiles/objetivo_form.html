@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block content %}<section class="form-shell"><div class="glass-card"><h1>Objetivo</h1><form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn btn-primary">Guardar</button></form></div></section>{% endblock %}

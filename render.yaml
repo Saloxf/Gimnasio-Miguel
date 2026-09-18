@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: cundifit
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python manage.py migrate --noinput && python manage.py collectstatic --noinput
+    startCommand: gunicorn config.wsgi:application
+    healthCheckPath: /es/
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "cundifit.onrender.com"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://cundifit.onrender.com"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cundifit-db
+          property: connectionString
+      - key: EMAIL_BACKEND
+        value: django.core.mail.backends.console.EmailBackend
+      - key: DEFAULT_FROM_EMAIL
+        value: no-reply@cundifit.onrender.com
+
+databases:
+  - name: cundifit-db
+    plan: free

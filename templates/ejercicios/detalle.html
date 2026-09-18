@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ ejercicio.nombre }} · CundiFit{% endblock %}
+{% block content %}
+<section class="container page-section">
+  <a class="back-link" href="{% url 'ejercicios:biblioteca' %}">← Volver a ejercicios</a>
+  <div class="row g-4 mt-2">
+    <div class="col-lg-7">
+      <article class="glass-card exercise-detail-card">
+        <div class="exercise-top">
+          <span class="eyebrow">{{ ejercicio.grupo_muscular }}</span>
+          <span class="badge-soft">{{ ejercicio.get_tipo_ejercicio_display }}</span>
+        </div>
+        <div class="detail-media"><img src="{{ ejercicio.media_url }}" alt="Demostración de {{ ejercicio.nombre }}"></div>
+        <h1>{{ ejercicio.nombre }}</h1>
+        {% if ejercicio.descripcion %}<p class="lead">{{ ejercicio.descripcion }}</p>{% endif %}
+        <div class="detail-meta">
+          <span><strong>Equipo:</strong> {{ ejercicio.equipamiento|default:"Peso corporal" }}</span>
+          {% if ejercicio.objetivo %}<span><strong>Objetivo:</strong> {{ ejercicio.objetivo }}</span>{% endif %}
+          {% if ejercicio.tempo %}<span><strong>Tempo:</strong> {{ ejercicio.tempo }}</span>{% endif %}
+        </div>
+        {% if ejercicio.instrucciones %}
+          <h2>Cómo hacerlo</h2>
+          <div class="exercise-instructions">{{ ejercicio.instrucciones|linebreaks }}</div>
+        {% endif %}
+        {% if ejercicio.consejos %}
+          <h2>Consejos</h2>
+          <ul>{% for consejo in ejercicio.consejos %}<li>{{ consejo }}</li>{% endfor %}</ul>
+        {% endif %}
+        {% if ejercicio.musculos_principales %}
+          <p class="muted"><strong>Músculos principales:</strong> {{ ejercicio.musculos_principales|join:", " }}</p>
+        {% endif %}
+        {% if ejercicio.fuente %}<small class="muted">Fuente: {{ ejercicio.fuente }}{% if ejercicio.licencia_url %} · <a href="{{ ejercicio.licencia_url }}" target="_blank" rel="noopener">Licencia</a>{% endif %}</small>{% endif %}
+      </article>
+    </div>
+    <div class="col-lg-5">
+      {% if ejercicio.video_embed_url %}
+        <article class="glass-card video-card">
+          <h2>Video demostrativo</h2>
+          <div class="video-frame"><iframe src="{{ ejercicio.video_embed_url }}" title="Video de {{ ejercicio.nombre }}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <small class="muted">Video externo de YouTube proporcionado por la fuente del catálogo.</small>
+        </article>
+      {% else %}
+        <article class="glass-card empty-state"><h2>Video próximamente</h2><p>Aún no hay un video asociado a este ejercicio.</p></article>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

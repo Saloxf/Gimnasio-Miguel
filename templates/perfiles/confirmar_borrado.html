@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block content %}<section class="form-shell"><div class="glass-card"><h1>Confirmar eliminación</h1><form method="post">{% csrf_token %}<p>¿Quieres eliminar "{{ object }}"?</p><button class="btn btn-danger">Eliminar</button><a class="btn btn-link" href="javascript:history.back()">Cancelar</a></form></div></section>{% endblock %}
