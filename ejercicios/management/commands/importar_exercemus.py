@@ -163,7 +163,6 @@ class Command(BaseCommand):
                 "licencia_nombre": license_data.get("full_name") or "",
                 "licencia_url": license_data.get("url") or "",
                 "activo": True,
-                "propietario": None,
             }
             exercise = Ejercicio.objects.filter(
                 grupo_muscular=group, propietario=None
