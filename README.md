@@ -155,8 +155,8 @@ datos PostgreSQL. Para desplegarlo:
 1. Sube el repositorio a GitHub.
 2. En Render selecciona **New > Blueprint** y conecta este repositorio.
 3. Confirma la creación de `cundifit` y `cundifit-db`.
-4. Espera a que finalice el build; las migraciones y los archivos estáticos se
-   procesan automáticamente.
+4. Espera a que finalice el build; las migraciones, el catálogo de ejercicios,
+   las rutinas prehechas y los archivos estáticos se procesan automáticamente.
 5. En la consola del servicio define `FITTRACK_ADMIN_USERNAME`,
    `FITTRACK_ADMIN_EMAIL` y `FITTRACK_ADMIN_PASSWORD`, y ejecuta:
 

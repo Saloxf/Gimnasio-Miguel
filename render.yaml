@@ -3,7 +3,7 @@ services:
     name: cundifit
     runtime: python
     plan: free
-    buildCommand: pip install -r requirements.txt && python manage.py migrate --noinput && python manage.py collectstatic --noinput
+    buildCommand: pip install -r requirements.txt && python manage.py migrate --noinput && python manage.py importar_exercemus && python manage.py crear_plantillas_rutinas && python manage.py collectstatic --noinput
     startCommand: gunicorn config.wsgi:application
     healthCheckPath: /es/
     envVars:

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.templatetags.static import static
 from urllib.parse import parse_qs, urlparse
 
 class GrupoMuscular(models.Model):
@@ -47,7 +48,7 @@ class Ejercicio(models.Model):
 
     @property
     def media_url(self):
-        return self.gif_url or self.imagen_url or "/static/img/exercise-placeholder.svg"
+        return self.gif_url or self.imagen_url or static("img/exercise-placeholder.svg")
 
     @property
     def video_embed_url(self):

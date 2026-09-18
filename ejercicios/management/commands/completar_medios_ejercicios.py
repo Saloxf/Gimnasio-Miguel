@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from django.templatetags.static import static
 
 from ejercicios.models import Ejercicio
 
@@ -8,7 +9,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         updated = Ejercicio.objects.filter(gif_url="", imagen_url="").update(
-            imagen_url="/static/img/exercise-placeholder.svg"
+            imagen_url=static("img/exercise-placeholder.svg")
         )
         self.stdout.write(
             self.style.SUCCESS(f"Medios completados para {updated} ejercicios.")
